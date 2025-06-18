@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Redirecting to Colab...</title>
+  <title>Testing URL Parameters</title>
   <script>
     window.onload = () => {
       const params = new URLSearchParams(window.location.search);
@@ -10,15 +10,18 @@
       const professor = params.get('professor_url');
 
       if (student && professor) {
-        const colabUrl = `https://colab.research.google.com/github/AIandAutomationTools/ai-quartet-evaluator/blob/main/ai_quartet_cleaned_pitch_analysis_version28.ipynb?student_url=${encodeURIComponent(student)}&professor_url=${encodeURIComponent(professor)}`;
-        window.location.href = colabUrl;
+        document.body.innerHTML = `
+          <h2>✅ Parameters Detected</h2>
+          <p><strong>Student URL:</strong> ${decodeURIComponent(student)}</p>
+          <p><strong>Professor URL:</strong> ${decodeURIComponent(professor)}</p>
+        `;
       } else {
         document.body.innerHTML = '<h2>❌ Missing parameters. Please include student_url and professor_url in the URL.</h2>';
-      }      
+      }
     };
   </script>  
 </head>
 <body>
-  <p>Redirecting to Google Colab notebook...</p>
+  <p>Reading student and professor URLs...</p>
 </body>
 </html>
