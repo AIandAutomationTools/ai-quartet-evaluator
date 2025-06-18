@@ -10,12 +10,13 @@
       const professor = params.get('professor_url');
 
       if (student && professor) {
-        // Construct the full redirect URL to the Colab notebook
-        const colabUrl = `https://colab.research.google.com/github/AIandAutomationTools/ai-quartet-evaluator/blob/main/ai_quartet_cleaned_pitch_analysis_version28.ipynb?student_url=${encodeURIComponent(student)}&professor_url=${encodeURIComponent(professor)}`;
+        const encodedStudent = encodeURIComponent(student);
+        const encodedProfessor = encodeURIComponent(professor);
+
+        const colabUrl = `https://colab.research.google.com/github/AIandAutomationTools/ai-quartet-evaluator/blob/main/ai_quartet_cleaned_pitch_analysis_version29.ipynb?student_url=${encodedStudent}&professor_url=${encodedProfessor}`;
         window.location.href = colabUrl;
       } else {
-        // Minimal error message if parameters are missing
-        document.body.innerHTML = '<h2>❌ Missing parameters. Please ensure the email link includes both student_url and professor_url.</h2>';
+        document.body.innerHTML = '<h2>❌ Missing parameters. Please include student_url and professor_url in the URL.</h2>';
       }
     };
   </script>  
