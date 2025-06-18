@@ -10,7 +10,7 @@
       const professor = params.get('professor_url');
 
       if (student && professor) {
-        const colabUrl = `https://colab.research.google.com/github/AIandAutomationTools/ai-quartet-evaluator/blob/main/ai_quartet_cleaned_pitch_analysis_version13.ipynb?student_url=${encodeURIComponent(student)}&professor_url=${encodeURIComponent(professor)}`;
+        const colabUrl = `https://colab.research.google.com/github/AIandAutomationTools/ai-quartet-evaluator/blob/main/ai_quartet_cleaned_pitch_analysis_version25.ipynb?student_url=${encodeURIComponent(student)}&professor_url=${encodeURIComponent(professor)}`;
         window.location.href = colabUrl;
       } else {
         document.body.innerHTML = '<h2>❌ Missing parameters. Please include student_url and professor_url in the URL.</h2>';
