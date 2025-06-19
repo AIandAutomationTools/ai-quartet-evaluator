@@ -1,68 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>AI Quartet Evaluator</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
+  <title>Redirecting to AI Quartet Evaluator...</title>
+  <script>
+    const queryParams = new URLSearchParams(window.location.search);
+    const student_url = queryParams.get("student_url");
+    const professor_url = queryParams.get("professor_url");
+
+    if (student_url && professor_url) {
+      const encodedStudent = encodeURIComponent(student_url);
+      const encodedProfessor = encodeURIComponent(professor_url);
+
+      const colabURL = `https://colab.research.google.com/github/AIandAutomationTools/ai-quartet-evaluator/blob/main/ai_quartet_cleaned_pitch_analysis_version31.ipynb?student_url=${encodedStudent}&professor_url=${encodedProfessor}`;
+
+      window.location.href = colabURL;
+    } else {
+      document.write("❌ Missing student or professor URL in query string.");
     }
-    #status {
-      margin-bottom: 10px;
-      font-weight: bold;
-      color: #2c3e50;
-    }
-    iframe {
-      width: 100%;
-      height: 90vh;
-      border: none;
-    }
-  </style>
+  </script>
 </head>
 <body>
-
-<h2>AI Quartet Evaluator</h2>
-<div id="status">⏳ Loading notebook and passing audio file URLs...</div>
-
-<iframe id="colabFrame" src=""></iframe>
-
-<script>
-  const queryParams = new URLSearchParams(window.location.search);
-  const student_url = queryParams.get("student_url");
-  const professor_url = queryParams.get("professor_url");
-
-  if (!student_url || !professor_url) {
-    document.getElementById("status").innerText = "❌ Missing student or professor URL in query string.";
-  } else {
-    const notebookURL = "https://colab.research.google.com/github/AIandAutomationTools/ai-quartet-evaluator/blob/main/ai_quartet_cleaned_pitch_analysis_version31.ipynb";
-
-    const iframe = document.getElementById("colabFrame");
-    iframe.src = notebookURL;
-
-    // Wait for iframe to load, then send the URLs into the notebook
-    iframe.onload = () => {
-      const sendToNotebook = () => {
-        iframe.contentWindow.postMessage({
-          type: 'SET_URLS',
-          student_url: student_url,
-          professor_url: professor_url
-        }, "*");
-
-        document.getElementById("status").innerText = "✅ Notebook loaded and URLs sent!";
-      };
-
-      // Delay slightly to ensure the kernel is ready
-      setTimeout(sendToNotebook, 3000);
-    };
-  }
-
-  // Listen for readiness from inside the notebook
-  window.addEventListener("message", function(event) {
-    if (event.data === "NOTEBOOK_READY") {
-      document.getElementById("status").innerText = "✅ Notebook is ready to receive URLs.";
-    }
-  });
-</script>
-
 </body>
 </html>
