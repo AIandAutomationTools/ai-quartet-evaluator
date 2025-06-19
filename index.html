@@ -1,27 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Redirecting to Colab...</title>
-  <script>
-    window.onload = () => {
-      const params = new URLSearchParams(window.location.search);
-      const student = params.get('student_url');
-      const professor = params.get('professor_url');
-
-      if (student && professor) {
-        const encodedStudent = encodeURIComponent(student);
-        const encodedProfessor = encodeURIComponent(professor);
-
-        const colabUrl = `https://colab.research.google.com/github/AIandAutomationTools/ai-quartet-evaluator/blob/main/ai_quartet_cleaned_pitch_analysis_version31.ipynb?student_url=${encodedStudent}&professor_url=${encodedProfessor}`;
-        window.location.href = colabUrl;
-      } else {
-        document.body.innerHTML = '<h2>❌ Missing parameters. Please include student_url and professor_url in the URL.</h2>';
-      }
-    };
-  </script>  
+  <title>AI Quartet Evaluator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    #status {
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+    iframe {
+      width: 100%;
+      height: 90vh;
+      border: none;
+    }
+  </style>
 </head>
 <body>
-  <p>Redirecting to Google Colab notebook...</p>
+
+<h2>AI Quartet Evaluator</h2>
+<div id="status">⏳ Loading notebook and passing audio file URLs...</div>
+
+<iframe id="colabFrame" src=""></iframe>
+
+<script>
+  const queryParams = new URLSearchParams(window.location.search);
+  const student_url = queryParams.get("student_url");
+  const professor_url = queryParams.get("professor_url");
+
+  if (!student_url || !professor_url) {
+    document.getElementById("status").innerText = "❌ Missing student or professor URL in query string.";
+  } else {
+    const notebookURL = "https://colab.research.google.com/github/AIandAutomationTools/ai-quartet-evaluator/blob/main/ai_quartet_cleaned_pitch_analysis_version31.ipynb";
+
+    const iframe = document.getElementById("colabFrame");
+    iframe.src = notebookURL;
+
+    // Wait for iframe to load, then send the URLs into the notebook
+    iframe.onload = () => {
+      const sendToNotebook = () => {
+        iframe.contentWindow.postMessage({
+          type: 'SET_URLS',
+          student_url: student_url,
+          professor_url: professor_url
+        }, "*");
+
+        document.getElementById("status").innerText = "✅ Notebook loaded and URLs sent!";
+      };
+
+      // Delay slightly to ensure the kernel is ready
+      setTimeout(sendToNotebook, 3000);
+    };
+  }
+
+  // Listen for readiness from inside the notebook
+  window.addEventListener("message", function(event) {
+    if (event.data === "NOTEBOOK_READY") {
+      document.getElementById("status").innerText = "✅ Notebook is ready to receive URLs.";
+    }
+  });
+</script>
+
 </body>
 </html>
