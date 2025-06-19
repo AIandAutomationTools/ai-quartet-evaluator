@@ -9,7 +9,7 @@
       const professor = params.get("professor_url");
 
       if (student && professor) {
-        const redirect = `https://colab.research.google.com/github/AIandAutomationTools/ai-quartet-evaluator/blob/main/ai_quartet_cleaned_pitch_analysis_version37.ipynb?student_url=${encodeURIComponent(student)}&professor_url=${encodeURIComponent(professor)}`;
+        const redirect = `https://colab.research.google.com/github/AIandAutomationTools/ai-quartet-evaluator/blob/main/ai_quartet_cleaned_pitch_analysis_version38.ipynb?student_url=${encodeURIComponent(student)}&professor_url=${encodeURIComponent(professor)}`;
         window.location.href = redirect;
       } else {
         document.write("<p style='color:red; font-size: 18px;'>❌ Missing student or professor URL. Please include them in the link.</p>");
