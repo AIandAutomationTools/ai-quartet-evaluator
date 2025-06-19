@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Redirecting to AI Quartet Evaluator...</title>
+  <meta charset="UTF-8">
+  <title>AI Quartet Evaluator Redirect</title>
   <script>
-    const queryParams = new URLSearchParams(window.location.search);
-    const student_url = queryParams.get("student_url");
-    const professor_url = queryParams.get("professor_url");
+    window.onload = () => {
+      const params = new URLSearchParams(window.location.search);
+      const student = params.get('student_url');
+      const professor = params.get('professor_url');
 
-    if (student_url && professor_url) {
-      const encodedStudent = encodeURIComponent(student_url);
-      const encodedProfessor = encodeURIComponent(professor_url);
-
-      const colabURL = `https://colab.research.google.com/github/AIandAutomationTools/ai-quartet-evaluator/blob/main/ai_quartet_cleaned_pitch_analysis_version32.ipynb?student_url=${encodedStudent}&professor_url=${encodedProfessor}`;
-
-      window.location.href = colabURL;
-    } else {
-      document.write("❌ Missing student or professor URL in query string.");
-    }
+      if (student && professor) {
+        const colabUrl = 
+          'https://colab.research.google.com/github/AIandAutomationTools/ai-quartet-evaluator/blob/main/ai_quartet_cleaned_pitch_analysis_version36.ipynb' +
+          '?student_url=' + encodeURIComponent(student) +
+          '&professor_url=' + encodeURIComponent(professor);
+        window.location.href = colabUrl;
+      } else {
+        document.body.innerHTML =
+          '<h3 style="color:red;">❌ Missing parameters. Ensure both student_url and professor_url are included.</h3>';
+      }
+    };
   </script>
 </head>
 <body>
+  <p>Redirecting you to the evaluation notebook…</p>
 </body>
 </html>
