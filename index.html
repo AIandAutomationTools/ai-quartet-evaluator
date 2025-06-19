@@ -13,7 +13,7 @@
         const encodedStudent = encodeURIComponent(student);
         const encodedProfessor = encodeURIComponent(professor);
 
-        const colabUrl = `https://colab.research.google.com/github/AIandAutomationTools/ai-quartet-evaluator/blob/main/ai_quartet_cleaned_pitch_analysis_version30.ipynb?student_url=${encodedStudent}&professor_url=${encodedProfessor}`;
+        const colabUrl = `https://colab.research.google.com/github/AIandAutomationTools/ai-quartet-evaluator/blob/main/ai_quartet_cleaned_pitch_analysis_version31.ipynb?student_url=${encodedStudent}&professor_url=${encodedProfessor}`;
         window.location.href = colabUrl;
       } else {
         document.body.innerHTML = '<h2>❌ Missing parameters. Please include student_url and professor_url in the URL.</h2>';
