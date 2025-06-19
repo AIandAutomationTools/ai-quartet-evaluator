@@ -1,28 +1,22 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>AI Quartet Evaluator Redirect</title>
-  <script>
-    window.onload = () => {
+  <head>
+    <meta charset="UTF-8" />
+    <title>AI Quartet Evaluator</title>
+    <script>
       const params = new URLSearchParams(window.location.search);
-      const student = params.get('student_url');
-      const professor = params.get('professor_url');
+      const student = params.get("student_url");
+      const professor = params.get("professor_url");
 
       if (student && professor) {
-        const colabUrl = 
-          'https://colab.research.google.com/github/AIandAutomationTools/ai-quartet-evaluator/blob/main/ai_quartet_cleaned_pitch_analysis_version37.ipynb' +
-          '?student_url=' + encodeURIComponent(student) +
-          '&professor_url=' + encodeURIComponent(professor);
-        window.location.href = colabUrl;
+        const redirect = `https://colab.research.google.com/github/AIandAutomationTools/ai-quartet-evaluator/blob/main/ai_quartet_cleaned_pitch_analysis_version37.ipynb?student_url=${encodeURIComponent(student)}&professor_url=${encodeURIComponent(professor)}`;
+        window.location.href = redirect;
       } else {
-        document.body.innerHTML =
-          '<h3 style="color:red;">❌ Missing parameters. Ensure both student_url and professor_url are included.</h3>';
+        document.write("<p style='color:red; font-size: 18px;'>❌ Missing student or professor URL. Please include them in the link.</p>");
       }
-    };
-  </script>
-</head>
-<body>
-  <p>Redirecting you to the evaluation notebook…</p>
-</body>
+    </script>
+  </head>
+  <body>
+    <p>Redirecting to Colab...</p>
+  </body>
 </html>
